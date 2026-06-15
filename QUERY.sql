@@ -22,7 +22,7 @@ CREATE TABLE Matches (
     fixture VARCHAR(150) NOT NULL,
     tournament_category VARCHAR(100) NOT NULL,
     base_ticket_price NUMERIC(10, 2) CHECK (base_ticket_price >= 0) NOT NULL,
-    match_status VARCHAR(50) CHECK (match_status IN ('Available', 'Selling Fast', 'Sold Out')) NOT NULL
+    match_status VARCHAR(50) CHECK (match_status IN ('Available', 'Selling Fast', 'Sold Out', 'Postponed')) NOT NULL
 );
 
 -- =========================================================================
@@ -33,7 +33,7 @@ CREATE TABLE Bookings (
     user_id INT REFERENCES Users(user_id),
     match_id INT REFERENCES Matches(match_id),
     seat_number VARCHAR(20),
-    payment_status VARCHAR(50) CHECK (payment_status IN ('Confirmed', 'Pending', 'Cancelled')),
+    payment_status VARCHAR(50) CHECK (payment_status IN ('Confirmed', 'Pending', 'Cancelled', 'Refunded')),
     total_cost NUMERIC(10, 2) CHECK (total_cost >= 0) NOT NULL
 );
 
